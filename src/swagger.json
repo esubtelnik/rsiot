@@ -1,0 +1,1157 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Genre": {
+				"enum": [
+					"Fiction",
+					"Non-Fiction",
+					"Mystery",
+					"Sci-Fi",
+					"Fantasy",
+					"Biography",
+					"History",
+					"Romance",
+					"Thriller",
+					"Horror",
+					"Poetry",
+					"Drama",
+					"Comics",
+					"Other"
+				],
+				"type": "string"
+			},
+			"BookStatus": {
+				"enum": [
+					"available",
+					"borrowed"
+				],
+				"type": "string"
+			},
+			"Book": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					},
+					"pages": {
+						"type": "number",
+						"format": "double"
+					},
+					"year": {
+						"type": "number",
+						"format": "double"
+					},
+					"genre": {
+						"$ref": "#/components/schemas/Genre"
+					},
+					"status": {
+						"$ref": "#/components/schemas/BookStatus"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"author",
+					"pages",
+					"year",
+					"genre",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Visitor.Exclude_keyofVisitor.currentBooks-or-history__": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"registrationDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"surname",
+					"registrationDate"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"VisitorWithBooks": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"registrationDate": {
+						"type": "string"
+					},
+					"currentBooks": {
+						"items": {
+							"$ref": "#/components/schemas/Book"
+						},
+						"type": "array"
+					},
+					"history": {
+						"items": {
+							"$ref": "#/components/schemas/Book"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"surname",
+					"registrationDate",
+					"currentBooks",
+					"history"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"code": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_VisitorWithBooks-Array_": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/VisitorWithBooks"
+						},
+						"type": "array"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_VisitorWithBooks_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/VisitorWithBooks"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Link": {
+				"properties": {
+					"table": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"table",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Visitor": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"registrationDate": {
+						"type": "string"
+					},
+					"currentBooks": {
+						"items": {
+							"$ref": "#/components/schemas/Link"
+						},
+						"type": "array"
+					},
+					"history": {
+						"items": {
+							"$ref": "#/components/schemas/Link"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"surname",
+					"registrationDate",
+					"currentBooks",
+					"history"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_Visitor_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/Visitor"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateVisitorRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"registrationDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"surname",
+					"registrationDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateVisitorRequest_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"registrationDate": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"ApiResponse_void_": {
+				"properties": {
+					"data": {},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DayOfWeek": {
+				"enum": [
+					"monday",
+					"tuesday",
+					"wednesday",
+					"thursday",
+					"friday",
+					"saturday",
+					"sunday"
+				],
+				"type": "string"
+			},
+			"Employee": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"experience": {
+						"type": "number",
+						"format": "double"
+					},
+					"workDays": {
+						"items": {
+							"$ref": "#/components/schemas/DayOfWeek"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"surname",
+					"experience",
+					"workDays"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_Employee-Array_": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/Employee"
+						},
+						"type": "array"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_Employee_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/Employee"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateEmployeeRequest": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"experience": {
+						"type": "number",
+						"format": "double"
+					},
+					"workDays": {
+						"items": {
+							"$ref": "#/components/schemas/DayOfWeek"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"surname",
+					"experience",
+					"workDays"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateEmployeeRequest_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"experience": {
+						"type": "number",
+						"format": "double"
+					},
+					"workDays": {
+						"items": {
+							"$ref": "#/components/schemas/DayOfWeek"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"ApiResponse_Book-Array_": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/Book"
+						},
+						"type": "array"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_Book_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/Book"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateBookRequest": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					},
+					"pages": {
+						"type": "number",
+						"format": "double"
+					},
+					"year": {
+						"type": "number",
+						"format": "double"
+					},
+					"genre": {
+						"$ref": "#/components/schemas/Genre"
+					}
+				},
+				"required": [
+					"title",
+					"author",
+					"pages",
+					"year",
+					"genre"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_CreateBookRequest_": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					},
+					"pages": {
+						"type": "number",
+						"format": "double"
+					},
+					"year": {
+						"type": "number",
+						"format": "double"
+					},
+					"genre": {
+						"$ref": "#/components/schemas/Genre"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"ApiResponse__message-string__": {
+				"properties": {
+					"data": {
+						"properties": {
+							"message": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"message"
+						],
+						"type": "object"
+					},
+					"successful": {
+						"type": "boolean"
+					},
+					"error": {
+						"$ref": "#/components/schemas/ErrorResponse"
+					}
+				},
+				"required": [
+					"successful"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BorrowBookRequest": {
+				"properties": {
+					"bookIds": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"visitorId": {
+						"type": "string"
+					},
+					"employeeId": {
+						"type": "string"
+					},
+					"borrowDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"bookIds",
+					"visitorId",
+					"employeeId",
+					"borrowDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ReturnBookRequest": {
+				"properties": {
+					"bookIds": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"visitorId": {
+						"type": "string"
+					},
+					"employeeId": {
+						"type": "string"
+					},
+					"returnDate": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"bookIds",
+					"visitorId",
+					"employeeId",
+					"returnDate"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "lab4",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/visitors": {
+			"get": {
+				"operationId": "GetVisitors",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_VisitorWithBooks-Array_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Visitors"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "AddVisitor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Visitor_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Visitors"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateVisitorRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/visitors/{id}": {
+			"get": {
+				"operationId": "GetVisitor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_VisitorWithBooks_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Visitors"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateVisitor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_VisitorWithBooks_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Visitors"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_CreateVisitorRequest_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteVisitor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Visitors"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/employees": {
+			"get": {
+				"operationId": "GetEmployees",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Employee-Array_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Employees"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "AddEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Employee_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Employees"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateEmployeeRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/employees/{id}": {
+			"get": {
+				"operationId": "GetEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Employee_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Employee_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_CreateEmployeeRequest_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteEmployee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Employees"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/books": {
+			"get": {
+				"operationId": "GetBooks",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Book-Array_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "AddBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Book_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateBookRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/books/{id}": {
+			"get": {
+				"operationId": "GetBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Book_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"patch": {
+				"operationId": "UpdateBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_Book_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_CreateBookRequest_"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse__message-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/books/borrow": {
+			"post": {
+				"operationId": "BorrowBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse__message-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/BorrowBookRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/books/return": {
+			"post": {
+				"operationId": "ReturnBook",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse__message-string__"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Books"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ReturnBookRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api"
+		}
+	]
+}
