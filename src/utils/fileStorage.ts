@@ -3,7 +3,8 @@ import path from "path";
 import { Link } from "../models/Link";
 import { decryptData, encryptData } from "./encryption";
 
-const dataDir = path.join(__dirname, "../../src/data/encrypted/");
+// Use path relative to project root, works in both dev and production
+const dataDir = path.join(process.cwd(), "src/data/encrypted/");
 
 function parseMyFormat(content: string): any[] {
    if (!content.trim()) return [];

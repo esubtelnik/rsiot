@@ -6,12 +6,13 @@
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "dev": "nodemon src/server.ts",
-      "build": "tsc",
+      "build": "tsc && npm run copy-data",
+      "copy-data": "xcopy \"src\\data\" \"dist\\data\" /E /I /Y",
       "tsoa:spec": "tsoa spec",
       "tsoa:routes": "tsoa routes",
       "tsoa:generate": "npm run tsoa:spec && npm run tsoa:routes",
       "start": "npm run tsoa:generate && ts-node src/server.ts",
-       "vercel-build": "npm run tsoa:generate && tsc"
+       "vercel-build": "npm run tsoa:generate && npm run build"
    },
    "keywords": [],
    "author": "",
