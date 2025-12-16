@@ -38,10 +38,10 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// const PORT = 5000;
-// app.listen(PORT, () => {
-//    console.log(`🚀 Server running at http://localhost:${PORT}`);
-//    console.log(`📘 Swagger docs available at http://localhost:${PORT}/docs`);
-// });
+const PORT = 5000;
+app.listen(PORT, () => {
+   console.log(`🚀 Server running at http://localhost:${PORT}`);
+   console.log(`📘 Swagger docs available at http://localhost:${PORT}/docs`);
+});
 
-module.exports = app;
+// module.exports = app;
