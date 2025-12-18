@@ -31,8 +31,8 @@ export async function decryptData(encrypted: string): Promise<string> {
 
   const [encoded, tableStr] = decrypted.split("::")
   const table = deserializeTable(tableStr)
-  console.log("table", table)
+//   console.log("table", table)
   const decoded = shannonFanoDecode(encoded, table)
-  console.log("decoded", decoded)
+//   console.log("decoded", decoded)
   return decoded
 }

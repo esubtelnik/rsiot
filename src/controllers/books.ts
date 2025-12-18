@@ -8,6 +8,8 @@ import {
    Patch,
    Delete,
    Path,
+   Response,
+   Produces,
 } from "tsoa";
 import {
    Book,
@@ -108,6 +110,15 @@ export class BookController extends Controller {
       return wrapResponse({
          message: `Book with id ${id} deleted successfully`,
       });
+   }
+
+   @Get("/{id}/download")
+   @Produces("application/json")
+   public async downloadBook(
+      @Path() id: string
+   ): Promise<string> {
+      const book = await this.getBook(id);
+      return JSON.stringify(book.data, null, 2);
    }
 
    @Post("/borrow")

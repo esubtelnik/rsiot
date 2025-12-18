@@ -3,8 +3,7 @@ import path from "path";
 import { Link } from "../models/Link";
 import { decryptData, encryptData } from "./encryption";
 
-// Use path relative to project root, works in both dev and production
-const dataDir = path.join(process.cwd(), "src/data/encrypted/");
+const dataDir = path.join(__dirname, "../../src/data/encrypted/");
 
 function parseMyFormat(content: string): any[] {
    if (!content.trim()) return [];
@@ -110,6 +109,7 @@ function serializeMyFormat(data: any[]): string {
             .join(";");
       })
       .join("\n");
+      
 }
 
 export async function readMyData<T>(filename: string): Promise<T[]> {

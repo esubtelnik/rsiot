@@ -3,7 +3,7 @@ import path from "path";
 import { encryptWithAlphabet, decryptWithAlphabet } from "./caesar-cipher";
 
 // Use path relative to project root, works in both dev and production
-const dataDir = path.join(process.cwd(), "src/data/encrypted/");
+const dataDir = path.join(__dirname, "../../src/data/encrypted/");
 const keyFile = path.join(dataDir, ".encryption_key");
 
 const MASTER_KEY = process.env.MASTER_KEY || "RSIOT_SECRET_LAB7";

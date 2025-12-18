@@ -33,6 +33,7 @@ export function encryptWithAlphabet(text: string, key: string): string {
 
     result += getChar(encPos)
   }
+  
 
   return result
 }

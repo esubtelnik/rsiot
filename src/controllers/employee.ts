@@ -1,4 +1,4 @@
-import { Controller, Get, Route, Tags, Post, Body, Path, Delete, Patch } from "tsoa";
+import { Controller, Get, Route, Tags, Post, Body, Path, Delete, Patch, Response, Produces } from "tsoa";
 import { Employee, CreateEmployeeRequest } from "../models/Employee";
 import { readMyData, writeMyData } from "../utils/fileStorage";
 import { wrapResponse, ApiResponse } from "../utils/responseWrapper";
@@ -88,5 +88,12 @@ export class EmployeeController extends Controller {
     return wrapResponse();
   }
 
-  
+  @Get("/{id}/download")
+  @Produces("application/json")
+  @Response(200, "File download")
+  public async downloadEmployee(@Path() id: string): Promise<string> {
+    const employee = await this.getEmployee(id);
+    return JSON.stringify(employee.data, null, 2);
+  }
+
 }

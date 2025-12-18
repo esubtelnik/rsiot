@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import { RegisterRoutes } from "./routes";
 import swaggerDocument from "./swagger.json";
 import { errorHandler, notFoundHandler } from "./middlewares/errorHandler";
+import { downloadHandler } from "./middlewares/downloadHandler";
 import cors from "cors";
 
 // import { testEncryption } from "./utils/encryption";
@@ -31,7 +32,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 const router = express.Router();
 RegisterRoutes(router);
-app.use("/api", router);
+app.use("/api", downloadHandler, router);
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

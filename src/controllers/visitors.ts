@@ -8,6 +8,8 @@ import {
    Path,
    Delete,
    Patch,
+   Response,
+   Produces,
 } from "tsoa";
 import { Visitor, CreateVisitorRequest, VisitorWithBooks } from "../models/Visitor";
 import { readMyData, writeMyData } from "../utils/fileStorage";
@@ -112,5 +114,13 @@ export class VisitorController extends Controller {
       await writeMyData(this.file, visitors);
 
       return wrapResponse();
+   }
+
+   @Get("/{id}/download")
+   @Produces("application/json")
+   @Response(200, "File download")
+   public async downloadVisitor(@Path() id: string): Promise<string> {
+      const visitor = await this.getVisitor(id);
+      return JSON.stringify(visitor.data, null, 2);
    }
 }

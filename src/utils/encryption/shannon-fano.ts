@@ -97,7 +97,7 @@ export function shannonFanoEncode(text: string): { encoded: string; table: CodeT
    for (const char of text) {
       const code = codeTable.get(char);
       if (!code) {
-         console.error(`Символ '${char}' (код: ${char.charCodeAt(0)}) не найден в таблице кодов!`);
+         console.error(`Character '${char}' (code: ${char.charCodeAt(0)}) not found in the code table!`);
       }
       encoded += code || "";
    }
@@ -113,25 +113,23 @@ export function shannonFanoEncode(text: string): { encoded: string; table: CodeT
 export function shannonFanoDecode(encoded: string, table: CodeTableEntry[]): string {
    if (!encoded || table.length === 0) return "";
 
-   // Отладка: проверяем таблицу на пустые значения
-   console.log("Таблица декодирования:");
    const invalidEntries = table.filter(e => !e.char || !e.code);
    if (invalidEntries.length > 0) {
-      console.error("Найдены некорректные записи в таблице:", invalidEntries);
+      console.error("Found invalid entries in the table:", invalidEntries);
    }
 
    const reverseTable = new Map<string, string>();
    table.forEach(({ char, code }) => {
-      if (char && code) { // Пропускаем пустые записи
+      if (char && code) {
          if (reverseTable.has(code)) {
-            console.error(`Дубликат кода '${code}' для символов '${reverseTable.get(code)}' и '${char}'`);
+            console.error(`Duplicate code '${code}' for characters '${reverseTable.get(code)}' and '${char}'`);
          }
          reverseTable.set(code, char);
       }
    });
 
-   console.log("Размер обратной таблицы:", reverseTable.size);
-   console.log("Длина закодированной строки:", encoded.length);
+   console.log("Size of the reverse table:", reverseTable.size);
+   console.log("Length of the encoded string:", encoded.length);
 
    let decoded = "";
    let currentCode = "";
@@ -147,17 +145,16 @@ export function shannonFanoDecode(encoded: string, table: CodeTableEntry[]): str
          currentCode = "";
       }
       
-      // Проверка на слишком длинный код (возможная ошибка)
       if (currentCode.length > 20) {
-         console.error(`Слишком длинный код на позиции ${position}: '${currentCode}'`);
-         console.error(`Декодировано до этого момента: '${decoded}'`);
+         console.error(`Too long code at position ${position}: '${currentCode}'`);
+         console.error(`Decoded up to this point: '${decoded}'`);
          break;
       }
    }
 
    if (currentCode.length > 0) {
-      console.error(`Остался необработанный код: '${currentCode}' (длина: ${currentCode.length})`);
-      console.error("Доступные коды в таблице:", Array.from(reverseTable.keys()).slice(0, 10));
+      console.error(`Unprocessed code: '${currentCode}' (length: ${currentCode.length})`);
+      console.error("Available codes in the table:", Array.from(reverseTable.keys()).slice(0, 10));
    }
 
    return decoded;
